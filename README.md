@@ -1,6 +1,6 @@
-# Otitour - Reserva de Passeios Turísticos
+# Potitour - Reserva de Passeios Turísticos
 
-Otitour é uma aplicação de reservas de passeios turísticos projetada para facilitar a exploração de pontos turísticos na cidade de **Natal-RN**. No entanto, sua estrutura é flexível e pode ser facilmente adaptada para outros destinos turísticos ao redor do mundo.
+Potitour é uma aplicação de reservas de passeios turísticos projetada para facilitar a exploração de pontos turísticos na cidade de **Natal-RN**. No entanto, sua estrutura é flexível e pode ser facilmente adaptada para outros destinos turísticos ao redor do mundo.
 
 ## Tecnologias Utilizadas
 
