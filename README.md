@@ -26,7 +26,7 @@ Potitour é uma aplicação de reservas de passeios turísticos projetada para f
 
 1. **Clonar o repositório:**
    ```sh
-   git clone https://github.com/seu-repositorio/otitour.git
+   git clone https://github.com/seu-repositorio/potitour.git
    ```
 2. **Abrir o arquivo `index.html` em um navegador**
 3. **Configurar o acesso ao Google Drive:**
@@ -43,7 +43,7 @@ Para adaptar a aplicação para outras cidades ou países:
 
 ## Contribuição
 
-Caso queira contribuir com melhorias para a Otitour:
+Caso queira contribuir com melhorias para a Potitour:
 - Fork o repositório e crie um branch com suas modificações.
 - Envie um Pull Request.
 - Sugestões e feedbacks são bem-vindos!
