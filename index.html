@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <title>Potitour - Turismo e Aventura em Natal-RN</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="Potitour Team">
+  <meta name="keywords" content="turismo, aventura, Natal, passeios, viagens, Potitour">
+  <meta name="description"
+    content="Descubra as melhores experiências de turismo e aventura em Natal-RN com a Potitour. Oferecemos passeios incríveis e serviços de alta qualidade.">
+
+
+  <link rel="stylesheet" href="css/swiper-bundle.min.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/vendor.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/core.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+
+
+<body>
+
+  <div id="icons"></div>
+
+  <!-- preloader -->
+  <div class="preloader-wrapper">
+    <div class="preloader">
+    </div>
+  </div>
+
+
+  <div id="head"></div>
+
+
+  <!-- steps -->
+  <section class=" overflow-hidden">
+    <div class="">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 g-0 justify-content-center">
+        <div class="col">
+          <div class="card border-0 bg-primary rounded-0 p-4 text-light">
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <svg width="60" height="60">
+                  <use xlink:href="#fresh"></use>
+                </svg>
+              </div>
+              <div class="col-md-9">
+                <div class="card-body p-0">
+                  <h5 class="text-light">Alto Ciclo de Passeios</h5>
+                  <p class="card-text">Oferecemos uma variedade de passeios disponíveis em toda a região.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-0 bg-primary rounded-0 p-4 text-light">
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <svg width="60" height="60">
+                  <use xlink:href="#organic"></use>
+                </svg>
+              </div>
+              <div class="col-md-9">
+                <div class="card-body p-0">
+                  <h5 class="text-light">100% Paisagens Naturais</h5>
+                  <p class="card-text">Exploramos paisagens deslumbrantes e bem preservadas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-0 bg-primary rounded-0 p-4 text-light">
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <svg width="60" height="60">
+                  <use xlink:href="#car"></use>
+                </svg>
+              </div>
+              <div class="col-md-9">
+                <div class="card-body p-0">
+                  <h5 class="text-light">Transfer 24h</h5>
+                  <p class="card-text">Oferecemos uma ampla variedade de veículos para serviços de transfer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- package -->
+  <section class="py-5 overflow-hidden">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-header d-flex flex-wrap justify-content-between mb-5">
+            <h2 class="section-title">Nossos Pacotes</h2>
+            <div class="d-flex align-items-center">
+              <div class="swiper-buttons">
+                <button class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
+                <button class="swiper-next category-carousel-next btn btn-yellow">❯</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- package -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="category-carousel swiper">
+            <div id="package-item" class="swiper-wrapper">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- product -->
+  <section class="pb-5">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-header d-flex flex-wrap justify-content-between my-4">
+            <h2 class="section-title">Todo Nossos Passeios</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="product-container"
+            class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- modal product -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalhes do Passeio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Add modal content -->
+        <div id="product-details" class="modal-body" style="height: 400px; overflow-y: auto;">
+
+        </div>
+        <!-- End modal content -->
+        <div class="modal-footer">
+          <!-- Action Buttons -->
+          <div class="d-flex gap-3 mb-4">
+            <div class="input-group w-auto">
+              <button class="btn btn-outline-secondary" type="button" onclick="decrementQuantity()">-</button>
+              <input type="number" class="form-control text-center" id="quantity" value="1" min="1" style="width: 70px">
+              <button class="btn btn-outline-secondary" type="button" onclick="incrementQuantity()">+</button>
+            </div>
+            <button id="modalButtonAddcart" onclick="addToCart(event)" data-bs-dismiss="modal"
+              class="btn btn-primary flex-grow-1">
+              <i class="bi bi-cart-plus me-2"></i>
+              Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- hghlight -->
+  <section class="py-4">
+    <div class="container-lg">
+      <h2 class="my-4">Confira mais sobre nosso serviços:</h2>
+    </div>
+  </section>
+
+  <section class="py-3">
+    <div class="container-lg">
+      <div id="banner-blocks-item"
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section class="pb-4 my-4">
+    <div class="container-lg">
+
+      <div class="pt-5 rounded-5" style="background-color: #28775A;">
+        <div class="container">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-4">
+              <h2 class="mt-5 text-white">Canal de Atendimento</h2>
+              <p class=" text-white">Entre em contato conosco diretamente no nosso whatsapp. Estamos prontinho para
+                atende-lo</p>
+              <div class="d-flex gap-2 flex-wrap mb-5">
+                <a href="#" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Fala Agora!</a>
+              </div>
+            </div>
+            <div class="col-md-5 text-center">
+              <img style="height: 500px;" src="images/phone-whatsapp.png" alt="phone" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- search -->
+  <section class="py-4">
+    <div class="container-lg">
+      <h2 class="my-4">O Que Pessoas + Pesquisam:</h2>
+      <div id="search-item"></div>
+    </div>
+  </section>
+
+
+  <!-- Floating favorite icon with counter -->
+  <div id="favorite-icon-container">
+    <div class="position-relative d-inline-block">
+      <button class="btn btn-primary rounded-5" onclick="openFavoritesModal(event)">
+        <svg width="24" height="24" class="mb-1">
+          <use xlink:href="#heart"></use>
+        </svg>
+      </button>
+      <span id="favorite-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-5">
+        0
+      </span>
+    </div>
+  </div>
+
+  <!-- icon de cart flutuante com a quantidade de itens no carrinho -->
+  <div id="cart-icon-container">
+    <div class="position-relative d-inline-block">
+      <button class="btn btn-primary rounded-5" onclick="openCartModal()">
+        <svg width="24" height="24" class="mb-1">
+          <use xlink:href="#cart"></use>
+        </svg>
+      </button>
+      <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-5">
+        0
+      </span>
+    </div>
+  </div>
+
+  <!-- modal do carrinho -->
+  <div id="cart-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cart-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cart-modal-label">Minhas Reservas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style=" height: 400px; overflow: auto;">
+          <div id="cart-items">
+            <!-- itens do carrinho serão adicionados aqui -->
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between align-items-center">
+          <div class="cart-total-wrapper">
+            <span class="text-muted fs-5">Total:</span>
+            <span id="cart-total" class="ms-2 fs-4 fw-bold text-success">R$ 0,00</span>
+          </div>
+
+          <button id="checkout-button" class="btn btn-primary btn-lg">
+            Finalizar Reserva
+            <svg width="16" height="16" class="ms-2">
+              <use xlink:href="#arrow-right"></use>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modelo do modal de favoritos -->
+  <div id="favorite-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="favorite-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="favorite-modal-label">Meus Favoritos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style=" height: 400px; overflow: auto;">
+          <div id="favorite-items">
+            <!-- itens dos favoritos serão adicionados aqui -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+</body>
+
+<!-- scripts -->
+<script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/swiper-bundle.min.js"></script>
+<script src="js/papaparse.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
+<!-- core -->
+
+<script sync src="core/helps.js"></script>
+<script sync src="core/layout.js"></script>
+<script sync src="core/components.js"></script>
+<script src="core/core.js" defer></script>
+
+</html>
