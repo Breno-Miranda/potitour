@@ -1,4 +1,3 @@
-
 #cart-icon-container {
     position: fixed;
     bottom: 20px;
@@ -53,8 +52,6 @@
 }
 
 .product-item {
-    /* width: 300px !important; */
-    height: 445px !important;
     object-fit: cover !important;
     object-position: center !important;
     background: #FFFFFF;
@@ -63,52 +60,25 @@
 
     figure img {
         width: 100% !important;
+        border-radius: 16px;
         height: 300px !important;
         object-fit: cover !important;
     }
-}
-
-.product-item .button-area {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: block;
-    padding: 16px;
-    background: white;
-    box-shadow: none;
-    z-index: 10;
 }
 
 
 @media (max-width: 768px) {
     .product-item {
         width: 100% !important;
-        min-height: 420px;
         padding: 16px;
         margin-bottom: 16px;
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .product-item figure {
-        height: 200px;
-        overflow: hidden;
     }
 
     .product-item figure img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-    }
-
-    .product-item .button-area {
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: block;
-        padding: 16px;
-        background: white;
-        box-shadow: none;
-        z-index: 10;
     }
 }
 
@@ -137,8 +107,10 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -2; /* Ensure it stays behind the video */
-    display: block; /* Initially hidden */
+    z-index: -2;
+    /* Ensure it stays behind the video */
+    display: block;
+    /* Initially hidden */
 }
 
 
@@ -146,4 +118,50 @@
     position: relative;
     z-index: 1;
     /* Outros estilos para o conteúdo */
+}
+
+/* skelation */
+
+
+/* Estilo base do Skeleton */
+.skeleton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Simulação de um card */
+.skeleton-card {
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+}
+
+.skeleton-text {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 10px;
+}
+
+.skeleton-title {
+    width: 70%;
+    height: 24px;
+    margin-bottom: 15px;
+}
+
+.skeleton-img {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 15px;
 }

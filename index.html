@@ -7,7 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="author" content="Potitour Team">
   <meta name="keywords" content="turismo, aventura, Natal, passeios, viagens, Potitour">
   <meta name="description"
@@ -29,59 +28,75 @@
   <!-- icons -->
   <div id="icons"></div>
 
-  <!-- preloader -->
-  <div class="preloader-wrapper">
-    <div class="preloader">
+  <!-- header -->
+  <div id="head">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
     </div>
   </div>
 
-  <!-- header -->
-  <div id="head"></div>
-
   <!-- steps -->
-  <div id="steps"></div>
+  <div id="steps">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+    </div>
+  </div>
 
   <!-- packages -->
-  <div id="packages"></div>
+  <div id="packages">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+    </div>
+  </div>
 
   <!-- products -->
-  <div id="products"></div>
+  <div id="products">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+    </div>
+  </div>
 
   <!-- hghlight -->
-  <div id="hghlight"></div>
+  <div id="hghlight">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+    </div>
+  </div>
 
   <!-- contact -->
-  <section class="pb-4 my-4">
-    <div class="container-lg">
-
-      <div class="pt-5 rounded-5" style="background-color: #28775A;">
-        <div class="container">
-          <div class="row justify-content-center align-items-center">
-            <div class="col-md-4">
-              <h2 class="mt-5 text-white">Canal de Atendimento</h2>
-              <p class=" text-white">Entre em contato conosco diretamente no nosso whatsapp. Estamos prontinho para
-                atende-lo</p>
-              <div class="d-flex gap-2 flex-wrap mb-5">
-                <a href="#" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Fala Agora!</a>
-              </div>
-            </div>
-            <div class="col-md-5 text-center">
-              <img style="height: 500px;" src="images/phone-whatsapp.png" alt="phone" class="img-fluid">
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <div id="contact">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
     </div>
-  </section>
+  </div>
 
   <!-- search -->
-  <section class="py-4">
-    <div class="container-lg">
-      <h2 class="my-4">O Que Pessoas + Pesquisam:</h2>
-      <div id="search-item"></div>
+  <div id="search">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
     </div>
-  </section>
+  </div>
 
   <!-- Floating favorite icon with counter -->
   <div id="favorite-icon-container">
@@ -100,7 +115,7 @@
   <!-- icon de cart flutuante com a quantidade de itens no carrinho -->
   <div id="cart-icon-container">
     <div class="position-relative d-inline-block">
-      <button class="btn btn-primary rounded-5" onclick="openCartModal()">
+      <button class="btn btn-primary rounded-5" onclick="loadCore().cart().openModal()">
         <svg width="24" height="24" class="mb-1">
           <use xlink:href="#cart"></use>
         </svg>
@@ -161,20 +176,27 @@
     </div>
   </div>
 
-  <div id="footer"></div>
+  <div id="footer">
+    <div class="container-lg skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+    </div>
+  </div>
 </body>
 
 <!-- scripts -->
 <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/jquery-1.11.0.min.js"></script>
-<script src="js/swiper-bundle.min.js"></script>
+<script src="js/swiper-bundle.min.js" defer></script>
 <script src="js/papaparse.min.js"></script>
 <script src="js/plugins.js"></script>
 
 <!-- core -->
 <script src="core/helps.js"></script>
 <script src="core/layout.js"></script>
-<script src="core/components.js" defer></script>
 <script src="core/core.js"></script>
+
 </html>
