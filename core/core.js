@@ -311,9 +311,34 @@ function openModalDetailsProduct(event, encodedProduct) {
 }
 
 
-function loadCore() {
+class CoreLoader {
 
-  function loadSwiper() {
+  modelDefault;
+  modelDefaultInstance;
+  modalLabel;
+  modalItems;
+
+  // constructor
+  constructor() { }
+
+  // load modal
+  loadModal = () => {
+    // modal Default
+    this.modelDefault = document.getElementById('defautl-modal');  // Corrigido o ID para 'modal-section'
+
+    // Verificar se o modal existe no DOM antes de criar a instância
+    if (this.modelDefault) {
+      this.modelDefaultInstance = new bootstrap.Modal(this.modelDefault);
+    } else {
+      console.warn("Elemento #modal-section não encontrado no DOM.");
+    }
+
+    // elementIds
+    this.modalLabel = document.getElementById('modal-label');
+    this.modalItems = document.getElementById('modal-items');
+  }
+
+  loadSwiper = () => {
     window.addEventListener("load", function () {
       let script = document.createElement("script");
       script.src = "js/script.js";
@@ -324,111 +349,50 @@ function loadCore() {
     });
   }
 
-  function pingPong() {
+  init = () => {
+    return new Promise((resolve, reject) => {
+      document.addEventListener("DOMContentLoaded", () => {
+        const components = [
+          { id: "steps", file: "steps.html" },
+          { id: "packages", file: "packages.html", callback: this.loadSwiper },
+          { id: "products", file: "products.html" },
+          { id: "hghlight", file: "hghlight.html" },
+          { id: "contact", file: "contact.html" },
+          { id: "search-section", file: "search.html" },
+          { id: "modal-section", file: "modal.html" },
+        ];
 
-    let isPing = true;
+        // Crie um array de Promises para cada fetch
+        const componentPromises = components.map(({ id, file, callback }) => {
+          return fetch(`components/${file}`)
+            .then((res) => res.text())
+            .then((data) => {
+              const element = document.getElementById(id);
+              if (element) {
+                element.innerHTML = data;
+                if (callback) callback();
+              }
+            })
+            .catch((err) => {
+              console.error(`Erro ao carregar ${file}:`, err);
+              throw err;  // Se ocorrer um erro, rejeita a promise
+            });
+        });
 
-    function loadCart(cart) {
-      let total = 0;
-      const cartCount = document.getElementById('cart-count');
-      cartCount.textContent = cart.length;
-      const cartTotal = document.getElementById('cart-total');
-      cart.forEach(item => {
-        const price = parseFloat(item.price
-          .replace('R$', '')
-          .replace('.', '')
-          .replace(',', '.')
-          .trim());
-        total += price * item.quantity;
+        // Espera que todos os componentes sejam carregados
+        Promise.all(componentPromises)
+          .then(() => {
+            console.log("Todos os componentes foram carregados.");
+            resolve(); // Resolve a Promise quando todos os componentes forem carregados
+          })
+          .catch((err) => {
+            reject("Erro no carregamento de componentes.");
+          });
       });
-      cartTotal.textContent = `R$ ${total.toLocaleString('pt-BR', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      })}`;
-    }
-
-    function loadFavorites() {
-      const favorite = JSON.parse(localStorage.getItem('favorite') || '[]')
-      const favoriteCount = document.getElementById('favorite-count');
-      favoriteCount.textContent = favorite.length;
-    }
-
-    return async function () {
-
-      setInterval(function () {
-        if (isPing) {
-          // commom
-          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-          // loads
-          loadCart(cart);
-          loadFavorites();
-
-          isPing = false;
-        } else {
-          // pong
-          isPing = true;
-        }
-      }, 500);
-    }
-
+    });
   }
 
-  function init() {
-    // loading steps component
-    fetch('components/steps.html')
-      .then(response => response.text())  // Converte resposta para texto
-      .then(data => {
-        document.getElementById('steps').innerHTML = data;
-      })
-      .catch(error => console.error('Erro ao carregar steps:', error));
-
-    // loading packages component
-    fetch('components/packages.html')
-      .then(response => response.text())  // Converte resposta para texto
-      .then(data => {
-        document.getElementById('packages').innerHTML = data;
-
-        // Agora inicializa o Swiper
-        loadSwiper();
-      })
-      .catch(error => console.error('Erro ao carregar packages:', error));
-
-    // loading products component
-    fetch('components/products.html')
-      .then(response => response.text())  // Converte resposta para texto
-      .then(data => {
-        document.getElementById('products').innerHTML = data;
-      })
-      .catch(error => console.error('Erro ao carregar products:', error));
-
-    // loading hghlight component
-    fetch('components/hghlight.html')
-      .then(response => response.text())  // Converte resposta para texto
-      .then(data => {
-        document.getElementById('hghlight').innerHTML = data;
-      })
-      .catch(error => console.error('Erro ao carregar hghlight:', error));
-
-    // loading contact component
-    fetch('components/contact.html')
-      .then(response => response.text())  // Converte resposta para texto
-      .then(data => {
-        document.getElementById('contact').innerHTML = data;
-      })
-      .catch(error => console.error('Erro ao carregar contact:', error));
-
-    // loading search component
-    fetch('components/search.html')
-      .then(response => response.text())  // Converte resposta para texto
-      .then(data => {
-        document.getElementById('search').innerHTML = data;
-      })
-      .catch(error => console.error('Erro ao carregar search:', error));
-
-  }
-
-  function baseFetch(url) {
+  baseFetch = (url) => {
     return fetch(url)
       .then(response => response.text())
       .then(csvData => {
@@ -445,33 +409,41 @@ function loadCore() {
       .catch(error => console.error("Erro ao buscar os dados:", error));
   }
 
-  function loadFetch() {
+  loadFetch = () => {
+    const self = this;
 
     function packages() {
       // function packages
       url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=752621485&single=true&output=csv"
-      baseFetch(url).then(data => {
-        console.log('packages (getFetchData)', data)
-        const containerPackage = document.getElementById('package-item');
-        data.map((package, index) => {
-          const packageHTML = `
-                      <div class="swiper-slide">
-                          <a href="${package.to}" class="nav-link swiper-slide text-center">
-                          <img style="width: 120px; height: 120px" src="${package.image}" class="rounded-circle" alt="${package.label}">
-                          <h4 class="fs-6 mt-3 fw-normal category-title">${package.label}</h4>
-                          </a>
-                      </div>
-                    
-                  `
-          containerPackage.insertAdjacentHTML('beforeend', packageHTML);
-        })
-      }).catch(error => console.error("Erro ao buscar os dados:", error));
+      self.baseFetch(url)
+        .then(data => {
+          console.log('packages (getFetchData)', data);
+
+          const containerPackage = document.getElementById('package-item');
+
+          // Verifica se o container existe e se data é válido
+          if (containerPackage && Array.isArray(data)) {
+            const packageHTML = data.map(pkg => `
+              <div class="swiper-slide">
+                <a href="${pkg.to}" class="nav-link swiper-slide text-center">
+                  <img style="width: 120px; height: 120px" src="${pkg.image}" class="rounded-circle" alt="${pkg.label}">
+                  <h4 class="fs-6 mt-3 fw-normal category-title">${pkg.label}</h4>
+                </a>
+              </div>
+            `).join(""); // Junta os elementos HTML em uma única string
+
+            containerPackage.insertAdjacentHTML('beforeend', packageHTML);
+          } else {
+            console.error('Erro: containerPackage não encontrado ou data não é um array válido.');
+          }
+
+        }).catch(error => console.error("Erro ao buscar os dados:", error));
     }
 
     function products() {
       // function products
       url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?output=csv";
-      baseFetch(url).then((data) => {
+      self.baseFetch(url).then((data) => {
         console.log('products (getFetchData)', data)
         const container = document.getElementById('product-container');
         const containerBlocks = document.getElementById('banner-blocks-item');
@@ -573,7 +545,7 @@ function loadCore() {
 
     function search() {
       url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=456867245&single=true&output=csv"
-      getFetchData(url).then(data => {
+      self.baseFetch(url).then(data => {
         console.log('search (getFetchData)', data)
         const containerSearch = document.getElementById('search-item');
         const conatinerSerachList = document.getElementById('search-list');
@@ -601,23 +573,23 @@ function loadCore() {
     ]
   }
 
-  function cart() {
+  cart = () => {
+    // get the cart items from local storage
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
     return {
-      openModal: function () {
-
-
-        const cartModal = document.getElementById('cart-modal');
-        const cartModalInstance = new bootstrap.Modal(cartModal);
-
-        // get the cart items from local storage
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      openModal: () => {
 
         // clear all divs
-        document.getElementById('cart-items').innerHTML = '';
+        this.modalLabel.innerHTML = 'Minhas Resevas';
+        this.modalItems.innerHTML = '';
+
+        // update the favorite items in the modal
+        let textHTML = '';
 
         // update the cart items in the modal
         cart.map(item => {
-          cartItemHTML = `
+          textHTML = `
            <div class="d-flex align-items-center gap-3 mb-3">
             <img src="${item.thumbnail}" width="100" alt="${item.name}" class="img-fluid rounded">
             
@@ -645,11 +617,9 @@ function loadCore() {
           </div>
     
           `;
-          document.getElementById('cart-items').insertAdjacentHTML('beforeend', cartItemHTML);
-
+          this.modalItems.insertAdjacentHTML('beforeend', textHTML);
         });
-
-        cartModalInstance.show();
+        this.modelDefaultInstance.show();
       },
       addToCart: function (event) {
         event.preventDefault()
@@ -670,18 +640,140 @@ function loadCore() {
     }
   }
 
-  async function run() {
-    console.time('**** loadCore ****');
-    await Promise.allSettled([
-      init(),
-      loadFetch(),
-      pingPong()(),
-    ]);
-    console.timeEnd('**** loadCore ****');
+  favorite = () => {
+    // get the favorite items from local storage
+    const favorite = JSON.parse(localStorage.getItem('favorite') || '[]');
+
+    // clear all divs
+    this.modalLabel.innerHTML = 'Meus Passeios Favoritos';
+    this.modalItems.innerHTML = '';
+
+    return {
+      openModal: () => {
+        // update the favorite items in the modal
+        let textHTML = '';
+
+        favorite.forEach(item => {
+          textHTML = `
+             <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="${item.thumbnail}" width="100" alt="${item.name}" class="img-fluid rounded">
+              <div class="flex-grow-1">
+                <h6 class="mb-1">${item.name}</h6>
+              </div>
+      
+               <button class="btn btn-outline-danger btn-sm" data-id="${item.id}" onclick="instance.favorite().removeFromFavorite(event, '${item.id}')">
+                <svg width="18" height="18">
+                  <use xlink:href="#trash"></use>
+                </svg>
+              </button>
+            </div>
+          `;
+          this.modalItems.insertAdjacentHTML('beforeend', textHTML);
+        });
+
+        this.modelDefaultInstance.show();
+      },
+      updateFavorite: () => {
+        // get the favorite items from local storage
+        const favorite = JSON.parse(localStorage.getItem('favorite') || '[]');
+
+        // update the favorite items in the modal
+        favorite.forEach(item => {
+          let cartItemHTML = `
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="${item.thumbnail}" width="100" alt="${item.name}" class="img-fluid rounded">
+              <div class="flex-grow-1">
+                <h6 class="mb-1">${item.name}</h6>
+              </div>
+  
+              <button class="btn btn-outline-danger btn-sm" data-id="${item.id}" onclick="instance.favorite().removeFromFavorite(event,'${item.id}')">
+                <svg width="18" height="18">
+                  <use xlink:href="#trash"></use>
+                </svg>
+              </button>
+            </div>
+          `;
+          this.modalItems.insertAdjacentHTML('beforeend', cartItemHTML);
+        });
+      },
+      removeFromFavorite: (event, id) => {
+        event.preventDefault();
+
+        // Remove the item from the favorite
+        const updatedfavorite = favorite.filter(c => c.id !== Number(id));
+        localStorage.setItem('favorite', JSON.stringify(updatedfavorite));
+
+        // Chama 'updateFavorite' no contexto correto
+        this.favorite().updateFavorite();
+      },
+    };
   };
 
-  return { run, cart };
+  pingPong = () => {
+    let isPing = true;
+    return {
+      pingCart: function (cart) {
+        let total = 0;
+        document.getElementById('cart-count').textContent = cart.length;
+        const cartTotal = document.getElementById('cart-total');
+
+        cart.forEach(item => {
+          const price = parseFloat(item.price
+            .replace('R$', '')
+            .replace('.', '')
+            .replace(',', '.')
+            .trim());
+          total += price * item.quantity;
+        });
+
+        cartTotal.textContent = `R$ ${total.toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })}`;
+      },
+
+      pingFavorite: function () {
+        const favorite = JSON.parse(localStorage.getItem('favorite') || '[]');
+        const favoriteCount = document.getElementById('favorite-count');
+        favoriteCount.textContent = favorite.length;
+      },
+
+      ping: function () {
+        setInterval(() => {
+          if (isPing) {
+            // Comum
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            // Pings
+            this.pingCart(cart);
+            this.pingFavorite();
+
+            isPing = false;
+          } else {
+            // Pong
+            isPing = true;
+          }
+        }, 500);
+      }
+    };
+  }
+
+  run = async () => {
+    console.time('**** core ****');
+
+    // Aguarde 'init' primeiro
+    await this.init();
+
+    // Após 'init', execute as outras promessas
+    await Promise.allSettled([
+      this.loadFetch(),
+      this.pingPong().ping(),
+      this.loadModal()
+    ]);
+
+    console.timeEnd('**** core ****');
+  };
 }
 
-const instance = loadCore();
+const instance = new CoreLoader();
 instance.run();

@@ -89,7 +89,7 @@
   </div>
 
   <!-- search -->
-  <div id="search">
+  <div id="search-section">
     <div class="container-lg skeleton-card">
       <div class="skeleton skeleton-img"></div>
       <div class="skeleton skeleton-title"></div>
@@ -98,10 +98,13 @@
     </div>
   </div>
 
+  <!-- Modal -->
+  <div id="modal-section"></div>
+
   <!-- Floating favorite icon with counter -->
   <div id="favorite-icon-container">
     <div class="position-relative d-inline-block">
-      <button class="btn btn-primary rounded-5" onclick="openFavoritesModal(event)">
+      <button class="btn btn-primary rounded-5" onclick="instance.favorite().openModal()">
         <svg width="24" height="24" class="mb-1">
           <use xlink:href="#heart"></use>
         </svg>
@@ -115,7 +118,7 @@
   <!-- icon de cart flutuante com a quantidade de itens no carrinho -->
   <div id="cart-icon-container">
     <div class="position-relative d-inline-block">
-      <button class="btn btn-primary rounded-5" onclick="loadCore().cart().openModal()">
+      <button class="btn btn-primary rounded-5" onclick="instance.cart().openModal()">
         <svg width="24" height="24" class="mb-1">
           <use xlink:href="#cart"></use>
         </svg>
