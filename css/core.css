@@ -165,3 +165,12 @@
     height: 150px;
     margin-bottom: 15px;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.hover-opacity:hover {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
