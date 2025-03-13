@@ -174,3 +174,15 @@
     opacity: 0.8;
     transition: opacity 0.2s;
 }
+
+.sticky-top {
+    position: sticky;
+    top: 20px;
+}
+
+@media (max-width: 991px) {
+    .sticky-top {
+        position: relative;
+        top: 0;
+    }
+}

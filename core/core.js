@@ -13,11 +13,11 @@ function googleTranslateElementInit() {
 
 // Função para alterar o idioma
 function changeLanguage(lang) {
-  var select = document.querySelector("select.goog-te-combo");
-  if (select) {
-    select.value = lang;
-    select.dispatchEvent(new Event("change"));
-  }
+  new google.translate.TranslateElement({
+    pageLanguage: String(lang),
+    includedLanguages: 'en,pt,es',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
 }
 
 class CoreLoader {
@@ -39,12 +39,37 @@ class CoreLoader {
   modalBody;
   modalFooter;
   modelDefault;
-  modalDefaultBody;
-  modalDefaultContent;
   modelDefaultInstance;
 
   // constructor
   constructor() { }
+
+  loadPage = () => {
+    console.log('A página foi carregada!');
+    // Aqui você pode adicionar o código que deseja executar quando a página for carregada
+
+    // Obtém a URL atual
+    const url = new URL(window.location.href);
+
+    // Obtém o valor do parâmetro 'page'
+    const pageName = url.searchParams.get('page');
+
+    if (pageName)
+      fetch(`page/${pageName}.html`)
+        .then((res) => res.text())
+        .then((data) => {
+          const element = document.getElementById("body");
+          if (element) {
+            element.innerHTML = data;
+          }
+        })
+        .catch((err) => {
+          console.error(`Erro ao carregar ${pageName}:`, err);
+          throw err;  // Se ocorrer um erro, rejeita a promise
+        });
+
+    console.log('Nome da página:', pageName);
+  }
 
   loadScripts = () => {
     return {
@@ -63,11 +88,10 @@ class CoreLoader {
 
   loadModal = () => {
     this.modelDefault = document.getElementById('modal-default');
-    this.modalDefaultBody = document.getElementById('modal-default-body');
     this.modalDefaultContent = document.getElementById('modal-default-content');
 
-    this.modalDefaultContent.style.maxWidth = "80%";
-    this.modalDefaultContent.style.minWidth = "96%";
+    this.modalDefaultContent.style.minWidth = "50%";
+    this.modalDefaultContent.style.maxWidth = "100%";
 
     // Verificar se o modal existe no DOM antes de criar a instância
     if (this.modelDefault) {
@@ -129,138 +153,154 @@ class CoreLoader {
           }).catch(error => console.error("Erro ao buscar os dados:", error));
       },
       products: () => {
-        // function products
-        url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?output=csv";
-        this.loadData().baseFetch(url).then((data) => {
-          console.log('products (getFetchData)', data)
-          const container = document.getElementById('product-container');
-          const containerBlocks = document.getElementById('banner-blocks-item');
+        const container = document.getElementById('product-container');
+        const containerBlocks = document.getElementById('banner-blocks-item');
 
-          let textHTMLBlocks = this.textHTML;
-          let textHTMLProduct = this.textHTML;
+        if (container && containerBlocks) {
+          url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?output=csv";
+          this.loadData().baseFetch(url).then((data) => {
+            console.log('products (getFetchData)', data)
+            let textHTMLBlocks = this.textHTML;
+            let textHTMLProduct = this.textHTML;
+            data.map((product, index) => {
 
-          data.map((product, index) => {
-
-           textHTMLBlocks = `  
-                    <div class="col-12 col-md-4 mb-3" style="height: 300px;">
-                        <div class="h-100" style="background: url('${product.thumbnail}') no-repeat center; background-size: cover;">
-                            <div class="banner-content ${index === 0 ? '' : 'align-items-center'} p-3 h-100">
-                                <div class="content-wrapper text-light">
-                                    <h4 class="banner-title text-light">${product.nome_do_servico}</h4>
-                                    <p>Desconto de até ${product.desconto}%</p>
-                                    <a href="javascript:void(0)" 
-                                        class="btn-link text-white" 
-                                        onclick="instance.reservation().openModal(event, '${encodeURIComponent(JSON.stringify(product))}')">
-                                        Saiba Mais
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    `;
-
-            containerBlocks.insertAdjacentHTML('beforeend', textHTMLBlocks);
-
-
-            textHTMLProduct = `
-                        <div class="col p-2 product-item" id="${product.hash}">
-                            <figure>
-                                <a href="javascript:void(0)" 
-                                title="${product.nome_do_servico}" 
-                                onclick="instance.reservation().openModal(event, '${encodeURIComponent(JSON.stringify(product))}')">
-                                    <img width="200" height="200" 
-                                        src="${product.thumbnail}" 
-                                        alt="${product.nome_do_servico}" 
-                                        class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">${product.nome_do_servico}</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(${product.avaliacoes})</span>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>${product.valor_do_servico}</del>
-                                    <span class="text-dark fw-semibold">${product.valor_com_desconto}</span>
-                                    <span class="badge border border-dark-subtle fw-normal px-1 fs-7 lh-1 text-body-tertiary">
-                                        ${product.desconto}% OFF
-                                    </span>
-                                </div>
-                                <div class="p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col">
-                                            <a href="javascript:void(0)" 
-                                            class="btn w-100 btn-primary rounded-1 p-2 fs-7 btn-cart" 
+              textHTMLBlocks = `  
+                        <div class="col-12 col-md-4 mb-3" style="height: 300px;">
+                            <div class="h-100" style="background: url('${product.thumbnail}') no-repeat center; background-size: cover;">
+                                <div class="banner-content ${index === 0 ? '' : 'align-items-center'} p-3 h-100">
+                                    <div class="content-wrapper text-light">
+                                        <h4 class="banner-title text-light">${product.nome_do_servico}</h4>
+                                        <p>Desconto de até ${product.desconto}%</p>
+                                        <a href="javascript:void(0)" 
+                                            class="btn-link text-white" 
                                             onclick="instance.reservation().openModal(event, '${encodeURIComponent(JSON.stringify(product))}')">
-                                              Reservar
-                                            </a>
-                                        </div>
-                                        <div class="col-2">
-                                            <a href="javascript:void(0)" 
-                                            class="btn btn-danger rounded-1 p-1 fs-6" 
-                                            onclick="instance.favorite().addToFavorites(event, '${encodeURIComponent(JSON.stringify(product))}')">
-                                                <svg width="18" height="18">
-                                                    <use xlink:href="#heart"></use>
-                                                </svg>
-                                            </a>
-                                        </div>
+                                            Saiba Mais
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-  
-                    `;
-            container.insertAdjacentHTML('beforeend', textHTMLProduct);
-          });
+                        `;
+
+              containerBlocks.insertAdjacentHTML('beforeend', textHTMLBlocks);
 
 
-        }).catch(error => console.error("Erro ao buscar os dados:", error));
+              textHTMLProduct = `
+                            <div class="col p-3 product-item shadow-sm rounded border hover-shadow" id="${product.hash}">
+                              <div class="position-relative">
+                                  <!-- Badge de desconto flutuante -->
+                                  <div class="position-absolute top-0 end-0 m-2">
+                                      <span class="badge bg-danger fw-bold px-2 py-1 fs-6">
+                                          ${product.desconto}% OFF
+                                      </span>
+                                  </div>
+                                  <!-- Imagem com proporção fixa e efeito hover -->
+                                  <figure class="mb-2 overflow-hidden rounded">
+                                      <a href="javascript:void(0)" 
+                                        title="${product.nome_do_servico}" 
+                                        onclick="instance.reservation().openModal(event, '${encodeURIComponent(JSON.stringify(product))}', 'lg')">
+                                          <img 
+                                              src="${product.thumbnail}" 
+                                              alt="${product.nome_do_servico}" 
+                                              class="tab-image img-fluid transition-zoom"
+                                              style="aspect-ratio: 16/9; object-fit: cover; width: 100%;">
+                                      </a>
+                                  </figure>
+                              </div>
+                              
+                              <div class="d-flex flex-column">
+                                  <!-- Nome do serviço com limite de altura -->
+                                  <h3 class="fs-5 fw-medium text-start mb-2" style="height: 48px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                      ${product.nome_do_servico}
+                                  </h3>
+                                  
+                                  <!-- Avaliações com estrelas e número -->
+                                  <div class="d-flex align-items-center mb-2">
+                                      <div class="rating me-2">
+                                          <svg width="16" height="16" class="text-warning">
+                                              <use xlink:href="#star-full"></use>
+                                          </svg>
+                                          <svg width="16" height="16" class="text-warning">
+                                              <use xlink:href="#star-full"></use>
+                                          </svg>
+                                          <svg width="16" height="16" class="text-warning">
+                                              <use xlink:href="#star-full"></use>
+                                          </svg>
+                                          <svg width="16" height="16" class="text-warning">
+                                              <use xlink:href="#star-full"></use>
+                                          </svg>
+                                          <svg width="16" height="16" class="text-warning">
+                                              <use xlink:href="#star-half"></use>
+                                          </svg>
+                                      </div>
+                                      <span class="text-muted fs-7">(${product.avaliacoes} avaliações)</span>
+                                  </div>
+                                  
+                                  <!-- Preço e desconto -->
+                                  <div class="d-flex align-items-end gap-2 mb-3">
+                                      <span class="text-dark fw-bold fs-4">${product.valor_com_desconto}</span>
+                                      <del class="text-muted fs-6">${product.valor_do_servico}</del>
+                                  </div>
+                                  
+                                  <!-- Botões de ação -->
+                                  <div class="d-flex gap-2">
+                                      <button 
+                                          class="btn btn-primary flex-grow-1 rounded-pill py-2 fw-medium" 
+                                          onclick="instance.reservation().openModal(event, '${encodeURIComponent(JSON.stringify(product))}')">
+                                          <svg width="16" height="16" class="me-1">
+                                              <use xlink:href="#calendar"></use>
+                                          </svg>
+                                          Reservar agora
+                                      </button>
+                                    <button 
+                                        class="btn btn-danger rounded-circle p-2" 
+                                        style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" 
+                                        onclick="instance.favorite().addToFavorites(event, '${encodeURIComponent(JSON.stringify(product))}')">
+                                        <svg width="20" height="20" style="fill: white;">
+                                            <use xlink:href="#heart"></use>
+                                        </svg>
+                                    </button>
+                                  </div>
+                              </div>
+                          </div>
+                `;
+
+              container.insertAdjacentHTML('beforeend', textHTMLProduct);
+            });
+          }).catch(error => console.error("Erro ao buscar os dados:", error));
+        }
+
       },
       search: () => {
-        url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=456867245&single=true&output=csv"
-        this.loadData().baseFetch(url).then(data => {
-          console.log('search (getFetchData)', data)
-          const containerSearch = document.getElementById('search-item');
-          const conatinerSerachList = document.getElementById('search-list');
+        const containerSearch = document.getElementById('search-item');
+        const conatinerSerachList = document.getElementById('search-list');
+        if (containerSearch && conatinerSerachList) {
+          url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=456867245&single=true&output=csv"
+          this.loadData().baseFetch(url).then(data => {
+            console.log('search (getFetchData)', data)
+            let textSearchListHTML = this.textHTML;
+            let textSearchHTML = this.textHTML;
+            data.map(search => {
 
-          let textSearchListHTML = this.textHTML;
-          let textSearchHTML = this.textHTML;
-
-          data.map(search => {
-
-            textSearchListHTML = `
-                    <li class="menu-item">
-                        <a href="${search.to}" class="nav-link">${search.label}</a>
-                    </li>
-                    `
-            conatinerSerachList.insertAdjacentHTML('beforeend', textSearchListHTML);
-
-            textSearchHTML = `
-                        <a href="${search.to}" class="btn btn-warning me-2 mb-2">${search.label}</a>
+              textSearchListHTML = `
+                        <li class="menu-item">
+                            <a href="${search.to}" class="nav-link">${search.label}</a>
+                        </li>
                         `
-            containerSearch.insertAdjacentHTML('beforeend', textSearchHTML);
-          })
-        }).catch(error => console.error("Erro ao buscar os dados:", error));
+              conatinerSerachList.insertAdjacentHTML('beforeend', textSearchListHTML);
+
+              textSearchHTML = `
+                            <a href="${search.to}" class="btn btn-warning me-2 mb-2">${search.label}</a>
+                            `
+              containerSearch.insertAdjacentHTML('beforeend', textSearchHTML);
+            })
+          }).catch(error => console.error("Erro ao buscar os dados:", error));
+        }
+
+
       },
       run: () => {
-        this.loadData().packages();
+        // this.loadData().packages();
         this.loadData().products();
         this.loadData().search();
       }
@@ -272,7 +312,7 @@ class CoreLoader {
       document.addEventListener("DOMContentLoaded", () => {
         const components = [
           { id: "steps", file: "steps.html" },
-          { id: "packages", file: "packages.html", callback: this.loadScripts().swiper() },
+          // { id: "packages", file: "packages.html", callback: this.loadScripts().swiper() },
           { id: "products", file: "products.html" },
           { id: "hghlight", file: "hghlight.html" },
           { id: "contact", file: "contact.html" },
@@ -316,11 +356,14 @@ class CoreLoader {
       openModal: (event, encodedData) => {
         event.preventDefault();
 
+        // set height of modal
+        this.modalBody.style.height = "500px";
+
         // Decode the encoded product data
         data = JSON.parse(decodeURIComponent(encodedData))
 
         // clear all divs
-        this.modalLabel.innerHTML = `Reservar para ${data?.nome_do_servico}`;
+        this.modalLabel.innerHTML = `Detalhes da Passeio`;
         this.modalBody.innerHTML = '';
         this.modalFooter.innerHTML = '';
 
@@ -332,45 +375,96 @@ class CoreLoader {
 
         // adicionando details product modal
         textHTML = `
-              <div class="row g-4">
-              <!-- Image Gallery Column -->
-              <div class="col-md-6">
-                <!-- Main Product Image -->
-                <div class="position-relative mb-3">
-                  <img id="productImage" src="${data.thumbnail}" class="img-fluid w-100 h-50 rounded shadow-sm" alt="Product Image">
-                  <span class="badge bg-danger position-absolute top-0 end-0 m-2">-${data.desconto}%</span>
-                </div>
-                <!-- Thumbnail Gallery -->
-                <div class="row row-cols-5 g-2">
-                  ${[data.thumbnail, data.foto_1, data.foto_2, data.foto_3, data.foto_4, data.foto_5,
+            <div class="row g-4">
+                  <!-- Coluna de Imagens (Lado Esquerdo) -->
+                  <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h4 class="mb-3 fw-bold">${data.nome_do_servico}</h4>
+                    
+                    <!-- Imagem Principal -->
+                    <div class="position-relative mb-3">
+                      <img 
+                        id="productImage" 
+                        src="${data.thumbnail}" 
+                        class="img-fluid w-100 rounded shadow-sm object-fit-cover" 
+                        alt="${data.nome_do_servico}"
+                        style="height: 400px">
+                      <span class="badge bg-danger position-absolute top-0 end-0 m-2 fs-6 px-2 py-1">-${data.desconto}%</span>
+                    </div>
+                    
+                    <!-- Galeria de Miniaturas -->
+                    <div class="row g-2 mt-2">
+                      ${[data.thumbnail, data.foto_1, data.foto_2, data.foto_3, data.foto_4, data.foto_5,
           data.foto_6, data.foto_7, data.foto_8, data.foto_9, data.foto_10]
             .filter(img => img)
-            .map(img => `
-                      <div class="col">
-                        <img src="${img}" class="img-fluid rounded cursor-pointer hover-opacity" 
-                            onclick="document.getElementById('productImage').src = this.src"
-                            alt="Product thumbnail">
+            .map((img, index) => `
+                          <div class="col-3 col-sm-2 mb-2">
+                            <img 
+                              src="${img}" 
+                              class="img-fluid rounded border ${index === 0 ? 'border-primary' : ''}" 
+                              style="height: 70px; width: 100%; object-fit: cover; cursor: pointer; transition: all 0.2s ease;"
+                              onclick="
+                                document.getElementById('productImage').src = this.src;
+                                document.querySelectorAll('.col-3 img, .col-sm-2 img').forEach(img => img.classList.remove('border-primary'));
+                                this.classList.add('border-primary');
+                              "
+                              alt="Miniatura ${index + 1}">
+                          </div>
+                        `).join('')}
+                    </div>
+                  </div>
+                  
+                  <!-- Coluna de Detalhes (Lado Direito) -->
+                  <div class="col-lg-6">
+                    <div class="sticky-top pt-2" style="top: 20px; z-index: 100;">
+                      <!-- Preço -->
+                      <div class="d-flex align-items-center mb-4 p-3 bg-light rounded">
+                        <div>
+                          <span class="h3 text-primary fw-bold mb-0 d-block">${data.valor_com_desconto}</span>
+                          <del class="text-muted">${data.valor_do_servico}</del>
+                        </div>
+                        <div class="ms-auto">
+                          <button class="btn btn-primary rounded-pill px-4 py-2">
+                            <svg width="16" height="16" class="me-2">
+                              <use xlink:href="#calendar"></use>
+                            </svg>
+                            Reservar
+                          </button>
+                        </div>
                       </div>
-                    `).join('')}
-                </div>
-              </div>
-
-              <!-- Product Details Column -->
-              <div class="col-md-6">
-                <div class="sticky-md-top pt-3">
-                  <h3 id="productName" class="fw-bold mb-3"></h3>
-                  <!-- Price Section -->
-                  <div class="mb-4">
-                    <span class="h4 text-primary fw-bold">${data.valor_com_desconto}</span>
-                    <del class="text-muted ms-2">${data.valor_do_servico}</del>
+                      
+                      <!-- Descrição com Título -->
+                      <div class="mb-4">
+                        <h5 class="border-bottom pb-2 mb-3">Descrição do Serviço</h5>
+                        <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                          <p class="text-secondary lh-lg">${textoComQuebrasDeLinha}</p>
+                        </div>
+                      </div>
+                      
+                      <!-- Informações Adicionais -->
+                      <div class="bg-light rounded p-3 mb-3">
+                        <h5 class="mb-3">Informações Adicionais</h5>
+                        <div class="row g-2">
+                          <div class="col-6">
+                            <div class="d-flex align-items-center">
+                              <svg width="18" height="18" class="text-primary me-2">
+                                <use xlink:href="#star-full"></use>
+                              </svg>
+                              <span>${data.avaliacoes} avaliações</span>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="d-flex align-items-center">
+                              <svg width="18" height="18" class="text-primary me-2">
+                                <use xlink:href="#clock"></use>
+                              </svg>
+                              <span>Duração: ${data.duration}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <!-- Description -->
-                  <div class="mb-4" style="height: 500px; overflow-y: auto;">
-                    <p class="text-secondary lh-lg">${textoComQuebrasDeLinha}</p>
-                  </div>
                 </div>
-              </div>
-            </div>
           `
         this.modalBody.innerHTML = textHTML
 
@@ -438,22 +532,24 @@ class CoreLoader {
 
         if (cart.length > 0)
           this.modalFooter.innerHTML = `  
-              <div class="cart-total-wrapper">
+              <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 py-3">
+              <div class="cart-total-wrapper  text-sm-start w-100">
                 <span class="text-muted fs-5">Total:</span>
-                <span id="cart-total"  class="ms-2 fs-4 fw-bold text-success">R$ 0,00</span>
+                <span id="cart-total" class="ms-2 fs-4 fw-bold text-success">R$ 0,00</span>
               </div>
-
-              <button class="btn btn-primary btn-lg">
+              
+              <button class="btn btn-primary btn-lg w-100 w-sm-auto">
                 Finalizar Reserva
                 <svg width="16" height="16" class="ms-2">
                   <use xlink:href="#arrow-right"></use>
                 </svg>
               </button>
+            </div>
           `;
       },
       openModal: () => {
-        // update the favorite items in the modal
-        let textHTML = '';
+        //set heitht of modal
+        this.modalBody.style.height = "300px";
 
         // update the cart items in the modal
         this.cart().bodyHTMl(cart);
@@ -507,7 +603,7 @@ class CoreLoader {
 
     return {
       bodyHTMl: (favorite) => {
-        let textHTML = '';
+        let textHTML = this.textHTML;
 
         // update the favorite items in the modal
         favorite.forEach(item => {
@@ -530,26 +626,11 @@ class CoreLoader {
 
       },
       openModal: () => {
-        // update the favorite items in the modal
-        let textHTML = this.textHTML;;
+        // set height of modal
+        this.modalBody.style.height = "250px";
 
-        favorite.forEach(item => {
-          textHTML = `
-             <div class="d-flex align-items-center gap-3 mb-3">
-              <img src="${item.thumbnail}" width="100" alt="${item.name}" class="img-fluid rounded">
-              <div class="flex-grow-1">
-                <h6 class="mb-1">${item.name}</h6>
-              </div>
-      
-               <button class="btn btn-outline-danger btn-sm" data-id="${item.id}" onclick="instance.favorite().removeFromFavorite(event, '${item.id}')">
-                <svg width="18" height="18">
-                  <use xlink:href="#trash"></use>
-                </svg>
-              </button>
-            </div>
-          `;
-          this.modalBody.insertAdjacentHTML('beforeend', textHTML);
-        });
+        // structure the data
+        this.favorite().bodyHTMl(favorite);
 
         this.modelDefaultInstance.show();
       },
@@ -572,6 +653,7 @@ class CoreLoader {
         // get the favorite items from local storage
         const favorite = JSON.parse(localStorage.getItem('favorite') || '[]');
 
+        // structure the data
         this.favorite().bodyHTMl(favorite);
       },
       removeFromFavorite: (event, id) => {
@@ -649,6 +731,7 @@ class CoreLoader {
 
     // Após 'init', execute as outras promessas
     await Promise.allSettled([
+      this.loadPage(),
       this.loadData().run(),
       this.pingPong().ping(),
       this.loadModal()

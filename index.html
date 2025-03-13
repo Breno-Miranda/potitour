@@ -38,94 +38,98 @@
     </div>
   </div>
 
-  <!-- steps -->
-  <div id="steps">
+  <div id="body">
+
+
+    <!-- steps -->
+    <div id="steps">
+      <div class="container-lg skeleton-card">
+        <div class="skeleton skeleton-img"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+      </div>
+    </div>
+
+    <!-- packages -->
+    <!-- <div id="packages">
     <div class="container-lg skeleton-card">
       <div class="skeleton skeleton-img"></div>
       <div class="skeleton skeleton-title"></div>
       <div class="skeleton skeleton-text"></div>
       <div class="skeleton skeleton-text"></div>
     </div>
-  </div>
+  </div> -->
 
-  <!-- packages -->
-  <div id="packages">
-    <div class="container-lg skeleton-card">
-      <div class="skeleton skeleton-img"></div>
-      <div class="skeleton skeleton-title"></div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
+    <!-- products -->
+    <div id="products">
+      <div class="container-lg skeleton-card">
+        <div class="skeleton skeleton-img"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- products -->
-  <div id="products">
-    <div class="container-lg skeleton-card">
-      <div class="skeleton skeleton-img"></div>
-      <div class="skeleton skeleton-title"></div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
+    <!-- hghlight -->
+    <div id="hghlight">
+      <div class="container-lg skeleton-card">
+        <div class="skeleton skeleton-img"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- hghlight -->
-  <div id="hghlight">
-    <div class="container-lg skeleton-card">
-      <div class="skeleton skeleton-img"></div>
-      <div class="skeleton skeleton-title"></div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
+    <!-- contact -->
+    <div id="contact">
+      <div class="container-lg skeleton-card">
+        <div class="skeleton skeleton-img"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- contact -->
-  <div id="contact">
-    <div class="container-lg skeleton-card">
-      <div class="skeleton skeleton-img"></div>
-      <div class="skeleton skeleton-title"></div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
+    <!-- search -->
+    <div id="search-section">
+      <div class="container-lg skeleton-card">
+        <div class="skeleton skeleton-img"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- search -->
-  <div id="search-section">
-    <div class="container-lg skeleton-card">
-      <div class="skeleton skeleton-img"></div>
-      <div class="skeleton skeleton-title"></div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
+    <!-- Modal -->
+    <div id="modal-section"></div>
+
+    <!-- Floating favorite icon with counter -->
+    <div id="favorite-icon-container">
+      <div class="position-relative d-inline-block">
+        <button class="btn btn-primary rounded-5" onclick="instance.favorite().openModal()">
+          <svg width="24" height="24" class="mb-1">
+            <use xlink:href="#heart"></use>
+          </svg>
+        </button>
+        <span id="favorite-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-5">
+          0
+        </span>
+      </div>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div id="modal-section"></div>
-
-  <!-- Floating favorite icon with counter -->
-  <div id="favorite-icon-container">
-    <div class="position-relative d-inline-block">
-      <button class="btn btn-primary rounded-5" onclick="instance.favorite().openModal()">
-        <svg width="24" height="24" class="mb-1">
-          <use xlink:href="#heart"></use>
-        </svg>
-      </button>
-      <span id="favorite-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-5">
-        0
-      </span>
-    </div>
-  </div>
-
-  <!-- icon de cart flutuante com a quantidade de itens no carrinho -->
-  <div id="cart-icon-container">
-    <div class="position-relative d-inline-block">
-      <button class="btn btn-primary rounded-5" onclick="instance.cart().openModal()">
-        <svg width="24" height="24" class="mb-1">
-          <use xlink:href="#cart"></use>
-        </svg>
-      </button>
-      <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-5">
-        0
-      </span>
+    <!-- icon de cart flutuante com a quantidade de itens no carrinho -->
+    <div id="cart-icon-container">
+      <div class="position-relative d-inline-block">
+        <button class="btn btn-primary rounded-5" onclick="instance.cart().openModal()">
+          <svg width="24" height="24" class="mb-1">
+            <use xlink:href="#cart"></use>
+          </svg>
+        </button>
+        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-5">
+          0
+        </span>
+      </div>
     </div>
   </div>
 
