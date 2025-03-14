@@ -1,8 +1,6 @@
+// variables
+let data;
 
-let url = null;
-let data = null;
-
-// function google Translate
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'pt',
@@ -10,20 +8,7 @@ function googleTranslateElementInit() {
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
   }, 'google_translate_element');
 }
-
-// Função para alterar o idioma
-function changeLanguage(lang) {
-  new google.translate.TranslateElement({
-    pageLanguage: String(lang),
-    includedLanguages: 'en,pt,es',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-}
-
 class CoreLoader {
-
-  // variables
-  data;
 
   textHTML = `
     <div class="container-lg skeleton-card">
@@ -45,7 +30,6 @@ class CoreLoader {
   constructor() { }
 
   loadPage = () => {
-    console.log('A página foi carregada!');
     // Aqui você pode adicionar o código que deseja executar quando a página for carregada
 
     // Obtém a URL atual
@@ -67,8 +51,6 @@ class CoreLoader {
           console.error(`Erro ao carregar ${pageName}:`, err);
           throw err;  // Se ocorrer um erro, rejeita a promise
         });
-
-    console.log('Nome da página:', pageName);
   }
 
   loadScripts = () => {
@@ -125,7 +107,7 @@ class CoreLoader {
           .catch(error => console.error("Erro ao buscar os dados:", error));
       },
       packages: () => {
-        url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=752621485&single=true&output=csv"
+        let url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=752621485&single=true&output=csv"
         this.loadData().baseFetch(url)
           .then(data => {
             console.log('packages (getFetchData)', data);
@@ -157,7 +139,7 @@ class CoreLoader {
         const containerBlocks = document.getElementById('banner-blocks-item');
 
         if (container && containerBlocks) {
-          url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?output=csv";
+          let url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?output=csv";
           this.loadData().baseFetch(url).then((data) => {
             console.log('products (getFetchData)', data)
             let textHTMLBlocks = this.textHTML;
@@ -275,7 +257,7 @@ class CoreLoader {
         const containerSearch = document.getElementById('search-item');
         const conatinerSerachList = document.getElementById('search-list');
         if (containerSearch && conatinerSerachList) {
-          url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=456867245&single=true&output=csv"
+          let url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=456867245&single=true&output=csv"
           this.loadData().baseFetch(url).then(data => {
             console.log('search (getFetchData)', data)
             let textSearchListHTML = this.textHTML;
@@ -299,10 +281,30 @@ class CoreLoader {
 
 
       },
+      config: () => {
+        const sitemap = document.getElementById('sitemap');
+        if (sitemap) {
+          let url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhopJhhHEe_UW5sWWz6cmuFHPIrKFZP7vSzGwfvsP1MZa_5uZPtiBuWnhdVip9jywh7PHyv4iNJ5PU/pub?gid=944990260&single=true&output=csv";
+          this.loadData().baseFetch(url).then(data => {
+            console.log('config (getFetchData)', data)
+            const sitemap = data[0];
+
+            const email = document.getElementById('SITE_EMAIL');
+            const whatsapp = document.getElementById('SITE_WHATSAPP');
+
+            if (email) email.innerHTML = sitemap.email;
+            if (whatsapp) whatsapp.innerHTML = sitemap.whatsapp;
+
+            this.SITE_MAP = sitemap;
+          }
+          ).catch(error => console.error("Erro ao buscar os dados:", error));
+        }
+      },
       run: () => {
         // this.loadData().packages();
         this.loadData().products();
         this.loadData().search();
+        this.loadData().config();
       }
     }
   }
@@ -310,6 +312,7 @@ class CoreLoader {
   init = () => {
     return new Promise((resolve, reject) => {
       document.addEventListener("DOMContentLoaded", () => {
+
         const components = [
           { id: "steps", file: "steps.html" },
           // { id: "packages", file: "packages.html", callback: this.loadScripts().swiper() },
@@ -538,7 +541,7 @@ class CoreLoader {
                 <span id="cart-total" class="ms-2 fs-4 fw-bold text-success">R$ 0,00</span>
               </div>
               
-              <button class="btn btn-primary btn-lg w-100 w-sm-auto">
+              <button class="btn btn-primary btn-lg w-100 w-sm-auto" onclick="instance.cart().toWhatsapp()">
                 Finalizar Reserva
                 <svg width="16" height="16" class="ms-2">
                   <use xlink:href="#arrow-right"></use>
@@ -580,14 +583,36 @@ class CoreLoader {
 
         this.cart().bodyHTMl(cart);
       },
-      removeFromCart: function (event, id) {
+      removeFromCart: (event, id) => {
         event.preventDefault()
 
         // Remove the item from the cart
         const updatedCart = cart.filter(c => c.id !== Number(id));
         localStorage.setItem('cart', JSON.stringify(updatedCart));
 
-        this.updateCart();
+        this.cart().updateCart();
+      },
+      toWhatsapp: () => {
+        // get the cart items from local storage
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // get the phone number from the data attribute
+        const phoneNumber = this.SITE_MAP.whatsapp;
+
+        // create the WhatsApp message
+        let message = 'Olá,';
+        cart.forEach(element => {
+          message += `gostaria de reservar o passeio: ${element.name}.\n`;
+          message += `Valor: ${element.price} \n`;
+          message += `Quantidade: ${element.quantity} \n`;
+          message += `Total: R$ ${(parseFloat(element.price.replace('R$', '').replace(',', '.')) * element.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} \n`;
+        });
+
+        // create the WhatsApp URL
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        // redirect to whatsapp
+        window.location.href = whatsappUrl
       }
     }
   }
@@ -725,7 +750,6 @@ class CoreLoader {
 
   run = async () => {
     console.time('**** core ****');
-
     // Aguarde 'init' primeiro
     await this.init();
 
