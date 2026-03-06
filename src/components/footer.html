@@ -2,18 +2,16 @@
   <div class="container">
     <div class="row g-5 mb-5">
       <!-- Brand & Description -->
-      <!-- Brand & Description -->
       <div class="col-lg-5 col-md-6">
-        <a href="/" class="footer-brand d-flex align-items-center gap-2 mb-4">
-          <!-- <img src="/src/assets/images/logo.png" alt="Miranda Soft" style="height: 40px; width: auto;"> -->
-          <span>Miranda<span class="text-accent">Soft</span></span>
+        <a href="/" class="footer-brand d-flex align-items-center gap-2 mb-4" style="font-family: var(--heading-font);">
+          <span>Poti<span class="text-accent">tour</span></span>
         </a>
         <p class="footer-description">
-          Empresa líder em desenvolvimento de software e soluções tecnológicas inovadoras,
-          comprometida em transformar o seu negócio através da tecnologia.
+          Sua parceira em soluções digitais avançadas,
+          trazendo a eficiência e inovação Potitour para o seu negócio.
         </p>
         <div class="footer-social mt-4">
-          <a href="mailto:contato@mirandasoft.com.br" class="social-link">
+          <a href="mailto:contato@potitour.com.br" class="social-link">
             <i class="bi bi-envelope-fill"></i>
           </a>
           <a href="https://wa.me/5584988330532" class="social-link">
@@ -51,11 +49,11 @@
         <ul class="footer-contact">
           <li>
             <i class="bi bi-envelope-fill"></i>
-            <a href="mailto:contato@mirandasoft.com.br">contato@mirandasoft.com.br</a>
+            <a href="mailto:contato@potitour.com.br">contato@potitour.com.br</a>
           </li>
           <li>
-            <a href="https://wa.me/5584988330532" class="btn btn-outline-primary btn-sm rounded-pill mt-1"
-              target="_blank">
+            <a href="https://wa.me/5584988330532" class="btn btn-sm rounded-pill mt-1" target="_blank"
+              style="background-color: var(--gf-accent-green); color: var(--gf-primary-dark); border: none; font-weight: 600;">
               <i class="bi bi-whatsapp me-1"></i> Chamar no WhatsApp
             </a>
           </li>
@@ -69,12 +67,12 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="copyright">
-            © 2025 Miranda Soft. Todos os direitos reservados. CNPJ: 37.704.330/0001-78
+            © 2025 Potitour. Todos os direitos reservados. CNPJ: 37.704.330/0001-78
           </p>
         </div>
         <div class="col-md-6 text-md-end">
           <p class="made-with">
-            Tecnologia com <i class="bi bi-heart-fill text-danger"></i>
+            Tecnologia com <i class="bi bi-heart-fill text-danger"></i> por Potitour
           </p>
         </div>
       </div>
@@ -84,35 +82,29 @@
 
 <style>
   .dev-footer-section {
-    background: #0a0a0f;
+    background: var(--gf-primary-dark);
     padding: 80px 0 30px;
-    border-top: 1px solid rgba(59, 130, 246, 0.1);
+    border-top: 1px solid rgba(116, 149, 59, 0.2);
   }
 
   .footer-brand {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: var(--gf-highlight-yellow);
     text-decoration: none;
   }
 
   .footer-brand i {
     font-size: 1.75rem;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--gf-accent-green);
   }
 
   .footer-brand .text-accent {
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--gf-accent-green);
   }
 
   .footer-description {
-    color: #64748b;
+    color: rgba(253, 246, 178, 0.7);
     font-size: 0.95rem;
     line-height: 1.7;
     max-width: 400px;
@@ -129,23 +121,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.15);
+    background: rgba(116, 149, 59, 0.1);
+    border: 1px solid rgba(116, 149, 59, 0.2);
     border-radius: 12px;
-    color: #94a3b8;
+    color: var(--gf-highlight-yellow);
     font-size: 1.1rem;
     transition: all 0.3s ease;
   }
 
   .social-link:hover {
-    background: rgba(59, 130, 246, 0.2);
-    border-color: #3b82f6;
-    color: #f8fafc;
+    background: var(--gf-accent-green);
+    border-color: var(--gf-accent-green);
+    color: var(--gf-primary-dark);
     transform: translateY(-3px);
   }
 
   .footer-title {
-    color: #f8fafc;
+    color: var(--gf-highlight-yellow);
     font-weight: 600;
     font-size: 1rem;
     margin-bottom: 24px;
@@ -159,7 +151,7 @@
     left: 0;
     width: 30px;
     height: 2px;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: var(--gf-accent-green);
     border-radius: 2px;
   }
 
@@ -175,14 +167,14 @@
 
   .footer-links a,
   .footer-links span {
-    color: #64748b;
+    color: rgba(253, 246, 178, 0.8);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s ease;
   }
 
   .footer-links a:hover {
-    color: #3b82f6;
+    color: var(--gf-accent-green);
   }
 
   .footer-contact {
@@ -196,29 +188,29 @@
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 16px;
-    color: #64748b;
+    color: rgba(253, 246, 178, 0.8);
     font-size: 0.9rem;
   }
 
   .footer-contact li i {
-    color: #3b82f6;
+    color: var(--gf-accent-green);
     font-size: 1rem;
     margin-top: 2px;
   }
 
   .footer-contact a {
-    color: #64748b;
+    color: rgba(253, 246, 178, 0.8);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .footer-contact a:hover {
-    color: #f8fafc;
+    color: var(--gf-accent-green);
   }
 
   .footer-bottom {
     padding-top: 30px;
-    border-top: 1px solid rgba(59, 130, 246, 0.1);
+    border-top: 1px solid rgba(116, 149, 59, 0.2);
   }
 
   .copyright,

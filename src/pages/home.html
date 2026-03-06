@@ -1,69 +1,57 @@
 <!-- Hero Section -->
-<section class="dev-hero">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-7 dev-hero-content">
-        <div class="dev-hero-badge" id="hero-badge-text">
-          <span><i class="bi bi-rocket-takeoff-fill"></i> Tecnologia & Inovação</span>
-        </div>
+<section class="dev-hero position-relative overflow-hidden"
+  style="background-color: var(--gf-primary-dark); min-height: 100vh; padding-top: 140px; padding-bottom: 80px;">
 
-        <h1 class="dev-hero-title" id="hero-title">
-          Soluções digitais que<br>
-          <span class="text-gradient">transformam o seu negócio</span>
-        </h1>
+  <!-- Decorative Background Abstract instead of Plant Image -->
+  <div class="position-absolute align-self-center top-50 start-50 translate-middle z-0"
+    style="width: 150vh; height: 150vh; background: radial-gradient(circle, rgba(116,149,59,0.15) 0%, rgba(27,48,34,0) 70%); border-radius: 50%;">
+  </div>
 
-        <p class="dev-hero-subtitle" id="hero-subtitle">
-          Miranda Soft
+  <div class="container position-relative z-1 h-100 d-flex flex-column justify-content-between">
+    <div class="row align-items-start mt-5">
+      <!-- Left: Title -->
+      <div class="col-lg-7">
+        <h1 class="text-hero m-0" id="hero-title" style="color: var(--gf-highlight-yellow);">Rooted in<br>the Land</h1>
+        <h3 id="hero-subtitle" class="text-white mt-3 fw-light" style="opacity: 0.8; font-size: 1.5rem;">Miranda Soft
+        </h3>
+      </div>
+
+      <!-- Right: Stats -->
+      <div class="col-lg-5 text-end pt-3 d-none d-lg-block">
+        <h2 class="text-hero m-0" style="color: var(--gf-highlight-yellow); font-size: 84px;">20k</h2>
+        <p class="text-white small ms-auto text-end" style="max-width: 150px; line-height: 1.4;">Hectares
+          under<br>sustainable cultivation</p>
+      </div>
+    </div>
+
+    <!-- Middle/Bottom spacing & Content -->
+    <div class="row align-items-end mt-auto pt-5">
+      <!-- Left: Description and Badges -->
+      <div class="col-lg-6">
+        <p class="text-white text-opacity-75 mb-4" id="hero-desc" style="font-size: 1.1rem; max-width: 480px;">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s.
         </p>
-
-        <p class="dev-hero-description" id="hero-desc">
-          Somos uma empresa líder em desenvolvimento de software e soluções tecnológicas inovadoras.
-          Transformamos ideias complexas em produtos digitais de alta performance, focados em resultados
-          reais para sua empresa.
-        </p>
-
-        <!-- Solutions Tags -->
-        <div class="dev-tech-stack">
-          <span class="dev-tech-pill"><i class="bi bi-laptop"></i> Software Web</span>
-          <span class="dev-tech-pill"><i class="bi bi-phone"></i> Apps Mobile</span>
-          <span class="dev-tech-pill"><i class="bi bi-cloud-check"></i> Cloud Solutions</span>
-          <span class="dev-tech-pill"><i class="bi bi-graph-up-arrow"></i> Consultoria</span>
+        <div class="d-flex flex-wrap gap-3">
+          <div class="glass-panel text-white p-3 d-flex align-items-center gap-3">
+            <span id="hero-badge-text" style="font-size: 0.9rem; line-height: 1.2; font-weight: 500;">
+              <i class="bi bi-rocket-takeoff-fill" style="color: var(--gf-accent-green); font-size: 1.5rem;"></i>
+              Potitour Inovação
+            </span>
+          </div>
         </div>
-
-        <!-- Actions -->
-        <div class="dev-hero-actions">
-          <a href="#solucoes" class="dev-btn dev-btn-primary" id="hero-btn-primary">
-            <i class="bi bi-grid-fill"></i>
-            Conheça Nossas Soluções
-          </a>
-          <a href="#contact" class="dev-btn dev-btn-secondary" id="hero-btn-secondary">
-            <i class="bi bi-chat-text-fill"></i>
-            Fale com um Especialista
-          </a>
+        <div class="mt-5 pb-2 d-flex gap-3">
+          <a href="#solucoes" class="btn rounded-pill fw-bold border-0 shadow-sm" id="hero-btn-primary"
+            style="background-color: var(--gf-highlight-yellow); color: var(--gf-primary-dark); font-size: 0.95rem; padding: 12px 32px;">Conheça
+            Nossas Soluções</a>
+          <a href="#contact" class="btn rounded-pill fw-bold text-white shadow-sm" id="hero-btn-secondary"
+            style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); font-size: 0.95rem; padding: 12px 32px; backdrop-filter: blur(8px);">Fale
+            com Especialista</a>
         </div>
       </div>
 
-      <div class="col-lg-5 dev-hero-visual">
-        <div class="dev-avatar-wrapper">
-          <div class="dev-avatar"
-            style="border-radius: 20px; overflow: hidden; background: linear-gradient(45deg, #1e293b, #0f172a);">
-            <!-- Abstract abstract tech visual -->
-            <div class="d-flex align-items-center justify-content-center h-100 w-100">
-              <i class="bi bi-box-seam text-gradient" style="font-size: 8rem; opacity: 0.8;"></i>
-            </div>
-          </div>
-          <div class="dev-floating-elements">
-            <div class="dev-floating-item">
-              <i class="bi bi-trophy-fill text-warning"></i> Excelência
-            </div>
-            <div class="dev-floating-item">
-              <i class="bi bi-shield-check-fill text-success"></i> Segurança
-            </div>
-            <div class="dev-floating-item">
-              <i class="bi bi-lightning-charge-fill text-info"></i> Performance
-            </div>
-          </div>
-        </div>
+      <!-- Right side empty for visual balance -->
+      <div class="col-lg-6 mt-4 mt-lg-0 text-end pe-lg-5">
       </div>
     </div>
   </div>
@@ -133,86 +121,33 @@
 </section>
 
 <!-- About Section -->
-<section id="sobre" class="dev-section" style="background: rgba(255, 255, 255, 0.02);">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6 animate-on-scroll">
-        <div class="position-relative">
-          <div
-            style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.05);">
-            <h3 class="fw-bold mb-4" id="about-title">Sobre a <span class="text-gradient">Miranda Soft</span></h3>
-            <p class="text-muted mb-4" id="about-desc">
-              Fundada com a missão de democratizar o acesso à tecnologia de alta qualidade, a Miranda Soft (MSoft)
-              se estabeleceu como referência em desenvolvimento de soluções digitais no Rio Grande do Norte e para todo
-              o Brasil.
-            </p>
-            <p class="text-muted mb-4">
-              Nossa equipe é formada por especialistas apaixonados por código e inovação, com mais de uma década de
-              experiência
-              combinada em projetos de alta complexidade. Acreditamos que a tecnologia deve ser um facilitador de
-              negócios,
-              não uma barreira.
-            </p>
+<section id="sobre" class="dev-section position-relative overflow-hidden py-5"
+  style="background-color: var(--gf-highlight-yellow);">
 
-            <div class="row g-4 mt-2">
-              <div class="col-6">
-                <div class="d-flex align-items-center gap-3">
-                  <div class="fs-2 text-primary fw-bold">10+</div>
-                  <div class="text-muted small lh-sm">Anos de<br>Experiência</div>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="d-flex align-items-center gap-3">
-                  <div class="fs-2 text-success fw-bold">100%</div>
-                  <div class="text-muted small lh-sm">Foco no<br>Cliente</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- Marquee Background Text -->
+  <div class="position-absolute top-50 start-50 translate-middle w-100 text-center z-0" style="opacity: 0.5;">
+    <h2 class="text-marquee-outline m-0" style="-webkit-text-stroke: 1px rgba(27, 48, 34, 0.1);">POTITOUR MIRANDA SOFT
+      POTITOUR</h2>
+  </div>
+
+  <div class="container position-relative z-1 py-5 my-5">
+    <div class="row align-items-start g-5">
+      <div class="col-lg-6">
+        <span class="badge bg-white text-dark rounded-pill py-2 px-3 mb-4 fw-bold shadow-sm" style="font-size: 0.85rem;"
+          id="about-support-title">Sobre Nós</span>
+        <h2 class="fw-bold m-0" id="about-title"
+          style="font-family: var(--heading-font); color: var(--gf-primary-dark); font-size: clamp(32px, 4vw, 42px); line-height: 1.2; max-width: 500px;">
+          Soluções Tecnológicas Transformadoras
+        </h2>
       </div>
-      <div class="col-lg-6 animate-on-scroll">
-        <div class="dev-section-header text-start mb-4">
-          <span class="dev-section-badge">
-            <i class="bi bi-building"></i> Nossa Essência
-          </span>
-          <h2 class="dev-section-title" id="about-support-title">Por que escolher a MSoft?</h2>
-        </div>
-
-        <div class="d-flex flex-column gap-4">
-          <div class="d-flex gap-3">
-            <div class="flex-shrink-0">
-              <span class="badge rounded-circle bg-primary p-3"><i class="bi bi-check-lg fs-5"></i></span>
-            </div>
-            <div>
-              <h5 class="fw-bold mb-1">Qualidade Técnica Superior</h5>
-              <p class="text-muted m-0">Utilizamos as tecnologias mais modernas e estáveis do mercado (React, Node.js,
-                Laravel) para garantir longevidade ao seu projeto.</p>
-            </div>
-          </div>
-
-          <div class="d-flex gap-3">
-            <div class="flex-shrink-0">
-              <span class="badge rounded-circle bg-primary p-3"><i class="bi bi-clock-history fs-5"></i></span>
-            </div>
-            <div>
-              <h5 class="fw-bold mb-1">Entregas Ágeis</h5>
-              <p class="text-muted m-0">Metodologia Scrum para garantir entregas frequentes e feedback constante, sem
-                surpresas no final.</p>
-            </div>
-          </div>
-
-          <div class="d-flex gap-3">
-            <div class="flex-shrink-0">
-              <span class="badge rounded-circle bg-primary p-3"><i class="bi bi-people-fill fs-5"></i></span>
-            </div>
-            <div>
-              <h5 class="fw-bold mb-1">Parceria Real</h5>
-              <p class="text-muted m-0">Não somos apenas fornecedores, somos parceiros estratégicos do seu crescimento.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="col-lg-6">
+        <p class="text-dark fw-medium mt-2 mb-4" id="about-desc"
+          style="max-width: 440px; line-height: 1.6; font-size: 0.95rem;">
+          Fundada com a missão de democratizar o acesso à tecnologia de alta qualidade, a Miranda Soft (MSoft) se
+          estabeleceu como referência em desenvolvimento de soluções digitais.
+        </p>
+        <a href="#solucoes" class="btn rounded-pill text-white fw-bold px-4 py-2 mt-2"
+          style="background-color: var(--gf-primary-dark); font-size: 0.85rem;">CONHEÇA A MSOFT</a>
       </div>
     </div>
   </div>
@@ -222,22 +157,26 @@
 <section id="cta-section" class="dev-section py-5">
   <div class="container">
     <div class="card border-0"
-      style="background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%); border-radius: 20px; overflow: hidden;">
+      style="background: linear-gradient(135deg, var(--gf-primary-dark) 0%, var(--gf-moss-green) 100%); border-radius: 32px; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(27, 48, 34, 0.2);">
       <div class="card-body p-5 position-relative">
         <div class="row align-items-center position-relative" style="z-index: 2;">
-          <div class="col-lg-8">
-            <h2 class="fw-bold mb-3 text-white" id="cta-title">Conheça o nosso <span class="text-gradient">Super
-                App</span></h2>
-            <p class="lead text-light opacity-75 mb-4" id="cta-desc">
+          <div class="col-lg-8 ps-lg-4">
+            <h2 class="fw-bold mb-3 text-white" id="cta-title"
+              style="font-family: var(--heading-font); font-size: clamp(28px, 4vw, 42px);">
+              Conheça o nosso <span style="color: var(--gf-highlight-yellow);">Super App</span>
+            </h2>
+            <p class="lead text-white opacity-75 mb-4" id="cta-desc" style="font-size: 1.05rem;">
               Explore nossa suíte de ferramentas e utilitários desenvolvidos para facilitar o dia a dia de
               desenvolvedores e empresas.
             </p>
-            <a href="/apps" class="btn btn-primary btn-lg rounded-pill px-5">
+            <a href="/apps" class="btn rounded-pill border-0 fw-bold px-5 py-3 shadow-sm"
+              style="background-color: var(--gf-highlight-yellow); color: var(--gf-primary-dark);">
               Acessar Ferramentas <i class="bi bi-arrow-right ms-2"></i>
             </a>
           </div>
           <div class="col-lg-4 text-center mt-4 mt-lg-0">
-            <i class="bi bi-grid-1x2-fill text-gradient" style="font-size: 8rem; opacity: 0.2;"></i>
+            <i class="bi bi-rocket-takeoff-fill"
+              style="color: var(--gf-accent-green); font-size: 8rem; opacity: 0.15;"></i>
           </div>
         </div>
       </div>
@@ -246,7 +185,7 @@
 </section>
 
 <!-- Support Section -->
-<section id="suporte" class="dev-section" style="background: rgba(255, 255, 255, 0.02);">
+<section id="suporte" class="dev-section" style="background: var(--gf-gray-bg);">
   <div class="container">
     <div class="dev-section-header text-center mb-5">
       <span class="dev-section-badge">
@@ -259,47 +198,50 @@
     </div>
 
     <div class="row g-4 justify-content-center">
+      <!-- Chat Card -->
       <div class="col-lg-4 col-md-6">
-        <div class="card bg-dark border-0 h-100 p-4 text-center"
-          style="background: linear-gradient(145deg, rgba(30, 30, 45, 0.9), rgba(20, 20, 35, 0.95)) !important; border-radius: 16px; border: 1px solid rgba(59, 130, 246, 0.1) !important;">
+        <div class="card border-0 h-100 p-4 text-center"
+          style="background: #FFFFFF; border-radius: 32px; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;">
           <div class="card-body">
-            <div
-              class="bg-primary bg-opacity-25 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
-              style="width: 80px; height: 80px;">
-              <i class="bi bi-chat-dots fs-1 text-primary"></i>
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+              style="width: 80px; height: 80px; background: rgba(116, 149, 59, 0.1);">
+              <i class="bi bi-chat-dots fs-1" style="color: var(--gf-accent-green);"></i>
             </div>
-            <h5 class="text-white fw-bold mb-3">Chat em Tempo Real</h5>
+            <h5 class="fw-bold mb-3" style="color: var(--gf-primary-dark); font-family: var(--heading-font);">Chat em
+              Tempo Real</h5>
             <p class="text-muted small mb-0">Tire suas dúvidas instantaneamente com nossa equipe de suporte via chat.
             </p>
           </div>
         </div>
       </div>
 
+      <!-- KB Card -->
       <div class="col-lg-4 col-md-6">
-        <div class="card bg-dark border-0 h-100 p-4 text-center"
-          style="background: linear-gradient(145deg, rgba(30, 30, 45, 0.9), rgba(20, 20, 35, 0.95)) !important; border-radius: 16px; border: 1px solid rgba(16, 185, 129, 0.1) !important;">
+        <div class="card border-0 h-100 p-4 text-center"
+          style="background: #FFFFFF; border-radius: 32px; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;">
           <div class="card-body">
-            <div
-              class="bg-success bg-opacity-25 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
-              style="width: 80px; height: 80px;">
-              <i class="bi bi-book fs-1 text-success"></i>
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+              style="width: 80px; height: 80px; background: rgba(116, 149, 59, 0.1);">
+              <i class="bi bi-book fs-1" style="color: var(--gf-accent-green);"></i>
             </div>
-            <h5 class="text-white fw-bold mb-3">Base de Conhecimento</h5>
+            <h5 class="fw-bold mb-3" style="color: var(--gf-primary-dark); font-family: var(--heading-font);">Base de
+              Conhecimento</h5>
             <p class="text-muted small mb-0">Acesse nossa documentação completa, tutoriais e guias de uso.</p>
           </div>
         </div>
       </div>
 
+      <!-- Tickets Card -->
       <div class="col-lg-4 col-md-6">
-        <div class="card bg-dark border-0 h-100 p-4 text-center"
-          style="background: linear-gradient(145deg, rgba(30, 30, 45, 0.9), rgba(20, 20, 35, 0.95)) !important; border-radius: 16px; border: 1px solid rgba(245, 158, 11, 0.1) !important;">
+        <div class="card border-0 h-100 p-4 text-center"
+          style="background: #FFFFFF; border-radius: 32px; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;">
           <div class="card-body">
-            <div
-              class="bg-warning bg-opacity-25 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
-              style="width: 80px; height: 80px;">
-              <i class="bi bi-ticket-detailed fs-1 text-warning"></i>
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+              style="width: 80px; height: 80px; background: rgba(116, 149, 59, 0.1);">
+              <i class="bi bi-ticket-detailed fs-1" style="color: var(--gf-accent-green);"></i>
             </div>
-            <h5 class="text-white fw-bold mb-3">Tickets de Suporte</h5>
+            <h5 class="fw-bold mb-3" style="color: var(--gf-primary-dark); font-family: var(--heading-font);">Tickets de
+              Suporte</h5>
             <p class="text-muted small mb-0">Abra chamados técnicos e acompanhe o status das suas solicitações.</p>
           </div>
         </div>
@@ -307,7 +249,8 @@
     </div>
 
     <div class="text-center mt-5">
-      <a href="/support" class="btn btn-outline-primary rounded-pill px-5">
+      <a href="/support" class="btn rounded-pill px-5 fw-bold bg-white"
+        style="border: 2px solid var(--gf-primary-dark); color: var(--gf-primary-dark); padding: 12px 32px;">
         <i class="bi bi-headset me-2"></i>Acessar Central de Suporte
       </a>
     </div>
